@@ -20,23 +20,25 @@
 
 # Optimize Performance using In-Memory Technologies in SQL Database
 
-In-Memory technologies are available in all database in the Premium tier, including databases in Premium elastic pools. They help to optimize the performance of transactional (OLTP), analytics (OLAP), as well as mixed workloads (HTAP). With these technologies customers have been able to achieve up to 30X performance improvement for transaction processing and up to 100X performance improvement for analytical queries, for some scenarios. Not only do In-Memory technologies allow you to achieve unparalleled performance, you can also reduce cost: you do not need to upgrade the pricing tier of the database to achieve performance gains, and in some cases you could even reduce the pricing tier while still seeing performance improvements using In-Memory technologies, compared with traditional tables and indexes.
+In-Memory technologies are available in all database in the Premium tier, including databases in Premium elastic pools. They help to optimize the performance of transactional (OLTP), analytics (OLAP), as well as mixed workloads (HTAP). With these technologies customers have been able to achieve up to 30X performance improvement for transaction processing and up to 100X performance improvement for analytical queries, for some scenarios. Not only do In-Memory technologies allow you to achieve unparalleled performance, you can also reduce cost: you typically do not need to upgrade the pricing tier of the database to achieve performance gains, and in some cases you could even reduce the pricing tier while still seeing performance improvements using In-Memory technologies, compared with traditional tables and indexes.
 
 > [AZURE.VIDEO azure-sql-database-in-memory-technologies]
 
 Azure SQL Database has the following In-Memory technologies:
 
-- *In-Memory OLTP* increases throughput and reduces latency for transaction processing. Scenarios such as trading and gaming really see the performance benefits. Another common scenario is data ingestion from events or IoT devices. You can also use it to speed up caching, data load, and temp table and table variable scenarios.
+- *In-Memory OLTP* increases throughput and reduces latency for transaction processing. Scenarios that benefit from In-Memory OLTP are: high-throughput transaction processing such as trading and gaming, data ingestion from events or IoT devices, caching, data load, and temp table and table variable scenarios.
 - *Clustered Columnstore Indexes* reduce storage footprint (up to 10X) and improve performance for reporting and analytics queries. Use it with fact tables in your data marts to fit more data in your database and improve performance. Use it with historical data in your operational database to archive and be able to query up to 10 times more data.
 - *Nonclustered Columnstore Indexes* for Hybrid Transactional and Analytical Processing (HTAP): gain real-time insights into your business by querying the operational database directly, without the need to run an expensive ETL process and wait for the data warehouse to be populated. Nonclustered Columnstore indexes allow very fast execution of analytics queries on the OLTP database, while reducing the impact on the operational workload.
 - In-Memory OLTP and Columnstore can also be combined: you can have a memory-optimized table with a columnstore index, allowing you to both perform very fast transaction processing and run analytics queries very fast on the same data.
 
+Both Columnstore and In-Memory OLTP have been part of the SQL Server product since 2012 and 2014, respectively. Azure SQL Database and SQL Server share the same implementation of In-Memory technologies, and, going forward, new capabilities for these technologies are released on Azure SQL Database first, before making their way into the next release of SQL Server. 
 
 This topic describes aspects of In-Memory OLTP and Columnstore indexes that are specific to Azure SQL Database, and includes samples. First you will see the impact of these technologies on storage and what are the limits on data size. Then you will see how to manage moving databases that leverage these technologies between the different pricing tiers. Finally, you will see two samples that illustrate the use of In-Memory OLTP as well as Columnstore in Azure SQL Database.
 
-In-depth information about the technologies, which are available both in the Azure SQL Database service and the SQL Server product, go to the following locations:
+In-depth information about the technologiescan be found at the following locations:
 - [In-Memory OLTP](http://msdn.microsoft.com/library/dn133186.aspx)
 - [Columnstore Indexes Guide](https://msdn.microsoft.com/library/gg492088.aspx)
+- Hybrid Transactional and Analytical Processing aka [real-time operational analytics](https://msdn.microsoft.com/library/dn817827.aspx)
 
 A quick primer on In-Memory OLTP can be found here:
 - [Quick Start 1: In-Memory OLTP Technologies for Faster T-SQL Performance](http://msdn.microsoft.com/library/mt694156.aspx) - is another article to help you get started.

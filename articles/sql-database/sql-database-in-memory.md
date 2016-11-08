@@ -36,14 +36,17 @@ Both Columnstore and In-Memory OLTP have been part of the SQL Server product sin
 This topic describes aspects of In-Memory OLTP and Columnstore indexes that are specific to Azure SQL Database, and includes samples. First you will see the impact of these technologies on storage and what are the limits on data size. Then you will see how to manage moving databases that leverage these technologies between the different pricing tiers. Finally, you will see two samples that illustrate the use of In-Memory OLTP as well as Columnstore in Azure SQL Database.
 
 In-depth information about the technologiescan be found at the following locations:
+
 - [In-Memory OLTP](http://msdn.microsoft.com/library/dn133186.aspx)
 - [Columnstore Indexes Guide](https://msdn.microsoft.com/library/gg492088.aspx)
 - Hybrid Transactional and Analytical Processing aka [real-time operational analytics](https://msdn.microsoft.com/library/dn817827.aspx)
 
 A quick primer on In-Memory OLTP can be found here:
+
 - [Quick Start 1: In-Memory OLTP Technologies for Faster T-SQL Performance](http://msdn.microsoft.com/library/mt694156.aspx) - is another article to help you get started.
 
 In-depth videos about the technologies:
+
 - [In-Memory OLTP Videos: What it is and When/How to use it](https://blogs.msdn.microsoft.com/sqlserverstorageengine/2016/10/03/in-memory-oltp-video-what-it-is-and-whenhow-to-use-it/)
 - [Columnstore Index: In-Memory Analytics (i.e. columnstore index) Videos from Ignite 2016](https://blogs.msdn.microsoft.com/sqlserverstorageengine/2016/10/04/columnstore-index-in-memory-analytics-i-e-columnstore-index-videos-from-ignite-2016/)
 
@@ -58,6 +61,7 @@ Each supported standalone  database pricing tier and each elastic pool pricing t
 [SQL Database Service Tiers](sql-database-service-tiers.md) has the official list of In-Memory OLTP storage available for each supported standalone database and elastic pool pricing tier.
 
 The following counts towards your In-Memory OLTP storage cap:
+
 - Active user data rows in memory-optimized tables and table variables. Note that old row versions do not count toward the cap.
 - Indexes on memory-optimized tables.
 - Operational overhead of ALTER TABLE operations.
@@ -66,11 +70,13 @@ If you hit the cap you will receive an out-of-quota error and will no longer be 
 
 
 For details about monitoring In-Memory OLTP storage utilization and configuring alerts when almost hitting the cap see:
+
 - [Monitor In-Memory Storage](sql-database-in-memory-oltp-monitoring.md)
 
 #### Note about elastic pools
 
 With elastic pools the In-Memory OLTP Storage is shared across all databases in the pool, thus the usage in one database can potentially impact other databases. Two mitigations for this are:
+
 - Configure Max-eDTU for databases that is lower than the eDTU count for the pool as a whole. This caps the In-Memory OLTP Storage utilization in any database in the pool to the size corresponding to the eDTU count.
 - Configure Min-eDTU greater than 0. This guarantees that each database in the pool has the amount of In-Memory OLTP Storage available corresponding to the configured Min-eDTU.
 
@@ -91,6 +97,7 @@ Increasing the pricing tier for a database that uses In-Memory technologies does
 ### In-Memory OLTP
 
 *Downgrade to Basic/Standard.* In-Memory OLTP is not supported in databases in the Standard or Basic tier. In addition, it is not possible to move a database that has any In-Memory OLTP objects to the Standard or Basic tier.
+
 - Before downgrading the database to Standard/Basic, remove all memory-optimized table and table types, as well as all natively compiled T-SQL modules.
 
 There is a programmatic way to understand whether a given database supports In-Memory OLTP. You can execute the following Transact-SQL query:
@@ -107,6 +114,7 @@ If the query returns **1**, In-Memory OLTP is supported in this database.
 ### Columnstore Indexes
 
 *Downgrade to Basic/Standard.* Columnstore indexes are not supported in databases in the Standard or Basic tier. When downgrading a database to Standard/Basic, columnstore indexes will become unavailable. If you use a Clustered columnstore index, this means the table as a whole becomes unavailable.
+
 - Before downgrading the database to Standard/Basic, drop all clustered columnstore indexes.
 
 *Downgrade to lower Premium tier.* This will succeed as long as the database as a whole fits within the max database size for the target pricing tier or available storage in the elastic pool. There is no specific impact from the Columnstore indexes.
@@ -121,6 +129,7 @@ If the query returns **1**, In-Memory OLTP is supported in this database.
 You can create the AdventureWorksLT [V12] sample database by a few clicks in the [Azure portal](https://portal.azure.com/). Then the steps in this section explain how you can enrich your AdventureWorksLT database with In-Memory OLTP objects, and demonstrate performance benefits.
 
 A more simplistic, but more visually appealing performance demo for In-Memory OLTP can be found here:
+
 - Release: [in-memory-oltp-demo-v1.0](https://github.com/Microsoft/sql-server-samples/releases/tag/in-memory-oltp-demo-v1.0)
 - Source code: [in-memory-oltp-demo-source-code](https://github.com/Microsoft/sql-server-samples/tree/master/samples/features/in-memory/ticket-reservations)
 
